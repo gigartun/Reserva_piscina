@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Piscina</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="loginAdmin" class="card">
+            <div class="icon">🔐</div>
+            <h1>Acceso Administrador</h1>
+            
+            <div class="form-group">
+                <input type="password" id="pinAdmin" placeholder="Ingrese PIN" maxlength="4" class="pin-input">
+            </div>
+
+            <div id="mensajeAdmin" class="mensaje"></div>
+
+            <button onclick="autenticarAdmin()" class="btn-primary">Ingresar</button>
+            <a href="index.html" class="btn-secondary">Volver</a>
+        </div>
+
+        <div id="panelAdmin" style="display:none;">
+            <header>
+                <h1>Panel de Administración</h1>
+                <button onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Reservas</h3>
+                    <p class="stat-number" id="totalReservas">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Recaudado</h3>
+                    <p class="stat-number" id="totalRecaudado">S/ 0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Personas</h3>
+                    <p class="stat-number" id="totalPersonas">0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <button onclick="exportarCSV()" class="btn-export">📊 Exportar CSV</button>
+                <button onclick="cargarReservas()" class="btn-secondary">🔄 Actualizar</button>
+            </div>
+
+            <div class="card">
+                <h2>Gestión de Propietarios</h2>
+                <div class="form-group">
+                    <input type="text" id="dptoGestion" placeholder="Departamento (Ej: A-101)">
+                </div>
+                <div class="btn-row">
+                    <button onclick="marcarMoroso()" class="btn-warning">⚠️ Marcar Moroso</button>
+                    <button onclick="marcarBlacklist()" class="btn-danger">🚫 Blacklist</button>
+                    <button onclick="limpiarEstado()" class="btn-success">✅ Limpiar Estado</button>
+                </div>
+            </div>
+
+            <div class="card table-container">
+                <h2>Reservas Registradas</h2>
+                <div id="filtroFecha" class="form-group">
+                    <label>Filtrar por fecha:</label>
+                    <input type="date" id="filtroFechaInput" onchange="cargarReservas()">
+                </div>
+                <div class="table-scroll">
+                    <table id="tablaReservas">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Horario</th>
+                                <th>Dpto</th>
+                                <th>Personas</th>
+                                <th>Pago</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bodyReservas">
+                            <tr>
+                                <td colspan="7" class="no-data">No hay reservas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

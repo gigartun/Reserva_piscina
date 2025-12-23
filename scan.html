@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Acceso - Piscina</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="icon">📱</div>
+            <h1>Control de Acceso</h1>
+            <p>Escanear código QR</p>
+        </header>
+
+        <div class="card">
+            <div id="scanner" class="scanner-box">
+                <div class="camera-placeholder">
+                    <p>📷 Cámara del dispositivo</p>
+                    <small>Apunte al código QR de la reserva</small>
+                </div>
+                <video id="video" autoplay></video>
+                <canvas id="canvas" style="display:none;"></canvas>
+            </div>
+
+            <div class="form-group">
+                <label>O ingrese el código manualmente:</label>
+                <input type="text" id="qrManual" placeholder="Pegar código QR aquí">
+                <button onclick="validarQRManual()" class="btn-primary">Validar</button>
+            </div>
+
+            <div id="resultado" class="result-box" style="display:none;"></div>
+
+            <div class="btn-row">
+                <button onclick="iniciarCamara()" class="btn-secondary">📷 Activar Cámara</button>
+                <a href="index.html" class="btn-secondary">Volver</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Estado del Turno Actual</h3>
+            <div id="estadoTurno" class="info-box">
+                <p><strong>Horario actual:</strong> <span id="horarioActual">--:--</span></p>
+                <p><strong>Personas en piscina:</strong> <span id="aforoActual">0</span> / 30</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/scan.js"></script>
+</body>
+</html>
